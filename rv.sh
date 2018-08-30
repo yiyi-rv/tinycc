@@ -10,5 +10,10 @@ rm -rf $report_out
 make
 make test
 
+# The errors.json has 8.6G, so we only get the first 50 entries
+head -50 $json_out > tmp.json
+rm $json_out
+mv tmp.json $json_out
+
 touch $json_out && rv-html-report $json_out -o $report_out
 rv-upload-report $report_out
